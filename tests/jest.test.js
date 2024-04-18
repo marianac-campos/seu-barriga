@@ -1,4 +1,4 @@
-test('I must know the main main assertions of Jest', () => {
+test('if I know the main assertions of Jest', () => {
   let year = null;
 
   expect(year).toBe(null);
@@ -13,7 +13,7 @@ test('I must know the main main assertions of Jest', () => {
   expect(year).toBeDefined();
 });
 
-test('I must know how to work with objects', () => {
+test('if I know how to work with objects', () => {
   const plant = { name: 'Lavender', color: 'Purple', property: 'Calming' };
 
   expect(plant).toHaveProperty('name');
