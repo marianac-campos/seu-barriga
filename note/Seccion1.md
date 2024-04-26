@@ -5,16 +5,10 @@ Para evitar que o teste falhasse ao finalizar a execução da aplicação local,
 
 Abaixo compartilho com vocês minhas anotações a respeito dessa seção.
 
-## 1. Eslint
-**ESLint** é um framework de *linting** para **JavaScript**. 
-O **ESLint** permite aos desenvolvedores configurar regras personalizadas para o estilo de codificação e padrões específicos da equipe, ajudando a manter um código consistente e de alta qualidade em projetos **JavaScript**. 
-
-> *Linting é o processo de análise estática de código para encontrar problemas potenciais, erros de sintaxe, inconsistências de estilo e outras questões que possam afetar a legibilidade, manutenibilidade e funcionalidade do código. 
-
-## 2. Iniciando com Jest
+## 1. Iniciando com Jest
 Neste projeto, - como provavelmente já observado - utilizaremos o framework popularmente conhecido, **Jest**, para realizar os *testes unitários* da aplicação.
 
-### 2.1 Diferença de "it" e "test"
+### 1.1 Diferença de "it" e "test"
 No Jest tanto a função "it" quanto a "test" trarão o mesmo resultado para o seu teste. A escolha de qual utilizar fica a critério da equipe. 
 Algo que pode ser levado em consideração é a forma como se escreverá os testes:
 
@@ -32,7 +26,7 @@ describe('yourModule', () => {
 });
 ```
 
-# 3. Test Driven Development (TDD)
+# 2. Test Driven Development (TDD)
 O **TDD** refere-se a uma *prática de desenvolvimento de software* que consiste se começar a fazer a codificação a partir da escrita de **testes unitários**. 
 Essa prática é divida num ciclo 3 etapas nomeadas como **Red, Green e Refactor**. Funcionando da seguinte maneira:
 1. Escreve-se o teste referente a funcionalidade que será implementada. Ao executá-la é esperado que o teste falhe, representando a etapa **Red**.
@@ -44,3 +38,19 @@ O uso do TDD tem como benefício:
 - Maior segurança ao refatorar o código
 - Funcionalidades documentadas, facilitando a compreensão do código
 - Menos tempo gasto com depuração
+
+## 3. Novas Dependências Desbloqueadas!
+
+- slint
+- jest
+- express
+- supertest
+
+## 3.1 Eslint
+**ESLint** é um framework de *linting** para **JavaScript**. 
+O **ESLint** permite aos desenvolvedores configurar regras personalizadas para o estilo de codificação e padrões específicos da equipe, ajudando a manter um código consistente e de alta qualidade em projetos **JavaScript**. 
+
+> *Linting é o processo de análise estática de código para encontrar problemas potenciais, erros de sintaxe, inconsistências de estilo e outras questões que possam afetar a legibilidade, manutenibilidade e funcionalidade do código. 
+
+## 3.2 O que é supertest
+É uma dependência que simplifica o processo de teste de APIs HTTP. Permitindo que seja possível realizar requisições sem que seja necessário iniciar um servidor real.
