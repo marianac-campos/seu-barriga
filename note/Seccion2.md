@@ -1,6 +1,6 @@
 # Seção 2: Iniciando a API
 
-## TDD na Prática!
+## TDD na Prática
 
 1º Adicionei um teste unitário para uma nova rota de usuário que iria buscar por todos e no final retornar a todos os usuários. Como esperado da etapa RED, o teste falhou:
 ![alt text](<Screenshot from 2024-04-24 09-18-45.png>)
