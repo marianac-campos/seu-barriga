@@ -3,5 +3,9 @@ module.exports = (app) => {
     return app.db('accounts').insert(account, '*');
   };
 
-  return { save };
+  const find = (filter = {}) => {
+    return app.db('accounts').where(filter).select();
+  };
+
+  return { save, find };
 };

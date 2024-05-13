@@ -22,3 +22,23 @@ it('should insert a account with success', () => {
       expect(res.body).toHaveProperty('name', 'John Doe');
     });
 });
+
+it('should to list all accounts', () => {
+  return app.db('accounts').insert({ name: 'Acc List', user_id: user.id })
+    .then(() => request(app).get(MAIN_ROUTE))
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body.length).toBeGreaterThan(0);
+    });
+});
+
+it('should to return a account by id', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc Id', user_id: user.id }, ['id'])
+    .then((acc) => request(app).get(`${MAIN_ROUTE}/${acc[0].id}`))
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('user_id', user.id);
+      expect(res.body).toHaveProperty('name', 'Acc Id');
+    });
+});
