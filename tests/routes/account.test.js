@@ -4,8 +4,8 @@ const app = require('../../src/app');
 const MAIN_ROUTE = '/accounts';
 let user;
 
-beforeAll(() => {
-  const res = app.services.user.save({
+beforeAll(async () => {
+  const res = await app.services.user.save({
     name: 'Demi Lovato',
     email: `${Date.now()}@email.com`,
     password: 'passwordsecret',
