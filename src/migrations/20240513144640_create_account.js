@@ -6,7 +6,6 @@ exports.up = (knex) => {
       .references('id')
       .inTable('users')
       .notNull();
-    t.string('password').notNull();
   });
 };
 
