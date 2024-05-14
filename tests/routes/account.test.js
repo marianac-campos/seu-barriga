@@ -23,6 +23,15 @@ it('should insert a account with success', () => {
     });
 });
 
+it('should return an error when name is not defined', () => {
+  return request(app).post(MAIN_ROUTE)
+    .send({ user_id: user.id })
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('error', 'Name is a mandatory attribute!');
+    });
+});
+
 it('should to list all accounts', () => {
   return app.db('accounts').insert({ name: 'Acc List', user_id: user.id })
     .then(() => request(app).get(MAIN_ROUTE))
@@ -32,7 +41,7 @@ it('should to list all accounts', () => {
     });
 });
 
-it('should to return a account by id', () => {
+it('should to return a account by id with success', () => {
   return app.db('accounts')
     .insert({ name: 'Acc Id', user_id: user.id }, ['id'])
     .then((acc) => request(app).get(`${MAIN_ROUTE}/${acc[0].id}`))
@@ -40,5 +49,25 @@ it('should to return a account by id', () => {
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('user_id', user.id);
       expect(res.body).toHaveProperty('name', 'Acc Id');
+    });
+});
+
+it('should to update a account with success', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc Update', user_id: user.id }, ['id'])
+    .then((acc) => request(app).put(`${MAIN_ROUTE}/${acc[0].id}`)
+      .send({ name: 'Acc Updated' }))
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('name', 'Acc Updated');
+    });
+});
+
+it('should to delete a account with success', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc Delete', user_id: user.id }, ['id'])
+    .then((acc) => request(app).delete(`${MAIN_ROUTE}/${acc[0].id}`))
+    .then((res) => {
+      expect(res.status).toBe(204);
     });
 });
