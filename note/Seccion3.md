@@ -1,4 +1,4 @@
-# Seção 2: /users
+# Seção 3: /accounts
 
 ## TDD na Prática
 
