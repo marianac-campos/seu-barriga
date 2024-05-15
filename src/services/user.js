@@ -1,8 +1,19 @@
+const bcrypt = require('bcrypt-nodejs');
 const ValidationError = require('../errors/ValidationError');
 
+const getPasswordHash = (password) => {
+  const SALT = bcrypt.genSaltSync(10);
+
+  return bcrypt.hashSync(password, SALT);
+};
+
 module.exports = (app) => {
-  const findAll = (filter = {}) => {
-    return app.db('users').where(filter).select();
+  const findAll = () => {
+    return app.db('users').select();
+  };
+
+  const findOne = (filter = {}) => {
+    return app.db('users').where(filter).first();
   };
 
   const save = async (user) => {
@@ -12,12 +23,15 @@ module.exports = (app) => {
     if (!email) throw new ValidationError('Email is a mandatory attribute!');
     if (!password) throw new ValidationError('Password is a mandatory attribute!');
 
-    const userDb = await findAll({ email });
+    const userDb = await findOne({ email });
 
-    if (userDb && userDb.length > 0) throw new ValidationError('User already created!');
+    const userToSave = { ...user };
+    userToSave.password = getPasswordHash(password);
 
-    return app.db('users').insert(user, '*');
+    if (userDb) throw new ValidationError('User already created!');
+
+    return app.db('users').insert(user, ['id', 'name', 'email']);
   };
 
-  return { findAll, save };
+  return { findAll, findOne, save };
 };

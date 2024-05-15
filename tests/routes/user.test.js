@@ -17,7 +17,15 @@ it('should insert a user with success', () => {
     .then((res) => {
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty('name', 'John Doe');
+      expect(res.body).not.toHaveProperty('password');
     });
+});
+
+it('should need to cryptocrated the password', async () => {
+  const res = await request(app).post('/users').send({ name: 'John Doe', email, password: '1234' });
+  const result = await app.services.user.findOne(res.body.id);
+
+  expect(result.password).not.toBe('1234');
 });
 
 it('should return an error when name is not defined', () => {
@@ -47,7 +55,7 @@ it('should return an error when password is not defined', () => {
     });
 });
 
-it('should insert a user with success', () => {
+it('should return an error when user already created', () => {
   return request(app).post('/users')
     .send({ name: 'John Doe', email, password: '1234' })
     .then((res) => {
