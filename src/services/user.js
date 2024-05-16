@@ -30,7 +30,7 @@ module.exports = (app) => {
 
     if (userDb) throw new ValidationError('User already created!');
 
-    return app.db('users').insert(user, ['id', 'name', 'email']);
+    return app.db('users').insert(userToSave, ['id', 'name', 'email']);
   };
 
   return { findAll, findOne, save };
