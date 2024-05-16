@@ -4,3 +4,5 @@
 
 - bcrypt-nodejs
 - jwt-simple
+- passport
+- passport-jwt
