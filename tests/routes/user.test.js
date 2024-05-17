@@ -2,6 +2,7 @@ const request = require('supertest');
 const jwt = require('jwt-simple');
 const app = require('../../src/app');
 
+const MAIN_ROUTE = '/v1/users';
 const email = `${Date.now()}@email.com`;
 let user;
 
@@ -17,7 +18,7 @@ beforeAll(async () => {
 });
 
 it('should to list all users', () => {
-  return request(app).get('/users')
+  return request(app).get(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .then((res) => {
       expect(res.status).toBe(200);
@@ -26,7 +27,7 @@ it('should to list all users', () => {
 });
 
 it('should insert a user with success', () => {
-  return request(app).post('/users')
+  return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ name: 'John Doe', email, password: '1234' })
     .then((res) => {
@@ -37,7 +38,7 @@ it('should insert a user with success', () => {
 });
 
 it('should need to cryptocrated the password', async () => {
-  const res = await request(app).post('/users')
+  const res = await request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ name: 'John Doe', email, password: '1234' });
 
@@ -47,7 +48,7 @@ it('should need to cryptocrated the password', async () => {
 });
 
 it('should return an error when name is not defined', () => {
-  return request(app).post('/users')
+  return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ email, password: '1234' })
     .then((res) => {
@@ -57,7 +58,7 @@ it('should return an error when name is not defined', () => {
 });
 
 it('should return an error when email is not defined', () => {
-  return request(app).post('/users')
+  return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ name: 'John Doe', password: '1234' })
     .then((res) => {
@@ -67,7 +68,7 @@ it('should return an error when email is not defined', () => {
 });
 
 it('should return an error when password is not defined', () => {
-  return request(app).post('/users')
+  return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ name: 'John Doe', email })
     .then((res) => {
@@ -77,7 +78,7 @@ it('should return an error when password is not defined', () => {
 });
 
 it('should return an error when user already created', () => {
-  return request(app).post('/users')
+  return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ name: 'John Doe', email, password: '1234' })
     .then((res) => {

@@ -40,7 +40,7 @@ it('should not authenticate user that does not exist', () => {
 });
 
 it('should not access a protected route without token', () => {
-  return request(app).get('/users')
+  return request(app).get('/v1/users')
     .then((res) => {
       expect(res.status).toBe(401);
     });
