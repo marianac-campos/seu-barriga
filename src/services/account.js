@@ -1,14 +1,18 @@
 const ValidationError = require('../errors/ValidationError');
 
 module.exports = (app) => {
+  const find = (filter = {}) => {
+    return app.db('accounts').where(filter).select();
+  };
+
   const save = async (account) => {
     if (!account.name) throw new ValidationError('Name is a mandatory attribute!');
 
-    return app.db('accounts').insert(account, '*');
-  };
+    const accountDb = await find({ name: account.name, user_id: account.user_id });
 
-  const find = (filter = {}) => {
-    return app.db('accounts').where(filter).select();
+    if (accountDb.length > 0) throw new ValidationError('An account with that name already exists');
+
+    return app.db('accounts').insert(account, '*');
   };
 
   const update = ({ accountId, account }) => {

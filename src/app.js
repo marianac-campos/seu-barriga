@@ -24,6 +24,7 @@ app.use((error, req, res, next) => {
   const { name, message, stack } = error;
 
   if (name === 'ValidationError') res.status(400).json({ error: message });
+  if (name === 'Permission') res.status(403).json({ error: message });
   res.status(400).json(name, message, stack);
 
   next(error);

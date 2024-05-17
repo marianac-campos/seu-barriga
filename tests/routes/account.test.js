@@ -28,7 +28,7 @@ beforeEach(async () => {
 it('should insert a account with success', () => {
   return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
-    .send({ name: 'John Doe', user_id: user.id })
+    .send({ name: 'John Doe' })
     .then((res) => {
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty('name', 'John Doe');
@@ -42,6 +42,17 @@ it('should return an error when name is not defined', () => {
     .then((res) => {
       expect(res.status).toBe(400);
       expect(res.body).toHaveProperty('error', 'Name is a mandatory attribute!');
+    });
+});
+
+it('should return an error if name is duplicated', () => {
+  return app.db('accounts')
+    .insert([{ name: 'Acc Create', user_id: user.id }])
+    .then(() => request(app).post(MAIN_ROUTE).send({ name: 'Acc Create' })
+      .set('Authorization', `Bearer ${user.token}`))
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('error', 'An account with that name already exists');
     });
 });
 
@@ -69,6 +80,17 @@ it('should to return a account by id with success', () => {
     });
 });
 
+it('should not return account que nao pertence', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
+    .then((acc) => request(app).get(`${MAIN_ROUTE}/${acc[0].id}`)
+      .set('Authorization', `Bearer ${user.token}`))
+    .then((res) => {
+      expect(res.status).toBe(403);
+      expect(res.body).toHaveProperty('error', 'You are not allowed to do this');
+    });
+});
+
 it('should to update a account with success', () => {
   return app.db('accounts')
     .insert({ name: 'Acc Update', user_id: user.id }, ['id'])
@@ -81,6 +103,18 @@ it('should to update a account with success', () => {
     });
 });
 
+it('nao deve alterar a conta de outro usuário', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
+    .then((acc) => request(app).put(`${MAIN_ROUTE}/${acc[0].id}`)
+      .set('Authorization', `Bearer ${user.token}`)
+      .send({ name: 'Acc Updated' }))
+    .then((res) => {
+      expect(res.status).toBe(403);
+      expect(res.body).toHaveProperty('error', 'You are not allowed to do this');
+    });
+});
+
 it('should to delete a account with success', () => {
   return app.db('accounts')
     .insert({ name: 'Acc Delete', user_id: user.id }, ['id'])
@@ -88,5 +122,16 @@ it('should to delete a account with success', () => {
       .set('Authorization', `Bearer ${user.token}`))
     .then((res) => {
       expect(res.status).toBe(204);
+    });
+});
+
+it('nao deve deletar a conta de outro usuário', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
+    .then((acc) => request(app).delete(`${MAIN_ROUTE}/${acc[0].id}`)
+      .set('Authorization', `Bearer ${user.token}`))
+    .then((res) => {
+      expect(res.status).toBe(403);
+      expect(res.body).toHaveProperty('error', 'You are not allowed to do this');
     });
 });
