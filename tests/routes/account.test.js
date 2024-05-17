@@ -4,8 +4,9 @@ const app = require('../../src/app');
 
 const MAIN_ROUTE = '/v1/accounts';
 let user;
+let user2;
 
-beforeAll(async () => {
+beforeEach(async () => {
   const res = await app.services.user.save({
     name: 'Demi Lovato',
     email: `${Date.now()}@email.com`,
@@ -14,6 +15,14 @@ beforeAll(async () => {
 
   user = { ...res[0] };
   user.token = jwt.encode(user, 'Segredo!');
+
+  const res2 = await app.services.user.save({
+    name: 'Selena Gomez',
+    email: `${Date.now()}@email.com`,
+    password: 'passwordsecret',
+  });
+
+  user2 = { ...res2[0] };
 });
 
 it('should insert a account with success', () => {
@@ -36,13 +45,15 @@ it('should return an error when name is not defined', () => {
     });
 });
 
-it('should to list all accounts', () => {
-  return app.db('accounts').insert({ name: 'Acc List', user_id: user.id })
+it('should only list user accounts', () => {
+  return app.db('accounts')
+    .insert([{ name: 'Acc List #1', user_id: user.id }, { name: 'Acc List #2', user_id: user2.id }])
     .then(() => request(app).get(MAIN_ROUTE)
       .set('Authorization', `Bearer ${user.token}`))
     .then((res) => {
       expect(res.status).toBe(200);
-      expect(res.body.length).toBeGreaterThan(0);
+      expect(res.body.length).toBe(1);
+      expect(res.body[0]).toHaveProperty('name', 'Acc List #1');
     });
 });
 
