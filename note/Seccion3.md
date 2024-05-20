@@ -19,6 +19,16 @@ Ao final os testes que eu havia criado serviram para me indicar que a refatoraç
 
 ## O que é um middleware?
 
+## Migrations
+
+```
+node_modules/.bin/knex migrate:make create_transactions --env test
+
+node_modules/.bin/knex migrate:latest --env test
+
+node_modules/.bin/knex migrate:rollback --env test
+```
+
 ## Novas Dependências Desbloqueadas!
 
 - body-parser
