@@ -4,6 +4,12 @@
         "jest": true
     },
     "rules": {
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        "object-curly-newline": [
+            "error",
+            {
+                "multiline": true
+            }
+        ]
     }
 }
