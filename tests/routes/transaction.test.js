@@ -54,7 +54,7 @@ it('should insert a trasaction with success', () => {
     });
 });
 
-it('transações de entrada devem ser positivas', () => {
+it('incoming transactions should be positive', () => {
   return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ description: 'New T', date: new Date(), amount: -176, type: 'I', acc_id: accUser2.id })
@@ -65,7 +65,7 @@ it('transações de entrada devem ser positivas', () => {
     });
 });
 
-it('transações de entrada devem ser negativas', () => {
+it('outgoing transactions should be negative', () => {
   return request(app).post(MAIN_ROUTE)
     .set('Authorization', `Bearer ${user.token}`)
     .send({ description: 'New T', date: new Date(), amount: 176, type: 'O', acc_id: accUser2.id })
@@ -76,7 +76,7 @@ it('transações de entrada devem ser negativas', () => {
     });
 });
 
-describe('inserir transação inválida', () => {
+describe('invalid transactions', () => {
   const testTemplate = (newData, errorMessage) => {
     return request(app).post(MAIN_ROUTE)
       .set('Authorization', `Bearer ${user.token}`)
@@ -87,12 +87,12 @@ describe('inserir transação inválida', () => {
       });
   };
 
-  it('não deve criar transação sem descrição', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
-  it('não deve criar transação sem data', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
-  it('não deve criar transação sem valor', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
-  it('não deve criar transação sem conta', () => testTemplate({ acc_id: null }, 'AccountID is a mandatory attribute!'));
-  it('não deve criar transação sem tipo', () => testTemplate({ type: null }, 'Type is a mandatory attribute!'));
-  it('não deve criar transação com tipo inválido', () => testTemplate({ type: 'L' }, 'Invalid Type!'));
+  it('should not create transaction without description', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
+  it('should not create transaction without date', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
+  it('should not create transaction without amount', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
+  it('should not create transaction without account ID', () => testTemplate({ acc_id: null }, 'AccountID is a mandatory attribute!'));
+  it('should not create transaction without type', () => testTemplate({ type: null }, 'Type is a mandatory attribute!'));
+  it('should not create transaction with invalid type', () => testTemplate({ type: 'L' }, 'Invalid Type!'));
 });
 
 it('should return a transaction by id', () => {

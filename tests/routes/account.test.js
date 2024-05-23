@@ -80,7 +80,7 @@ it('should to return a account by id with success', () => {
     });
 });
 
-it('should not return account que nao pertence', () => {
+it('should not return account another user', () => {
   return app.db('accounts')
     .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
     .then((acc) => request(app).get(`${MAIN_ROUTE}/${acc[0].id}`)
@@ -103,7 +103,7 @@ it('should to update a account with success', () => {
     });
 });
 
-it('nao deve alterar a conta de outro usuário', () => {
+it('should not change account another user', () => {
   return app.db('accounts')
     .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
     .then((acc) => request(app).put(`${MAIN_ROUTE}/${acc[0].id}`)
@@ -125,7 +125,7 @@ it('should to delete a account with success', () => {
     });
 });
 
-it('nao deve deletar a conta de outro usuário', () => {
+it('should not delete account another user', () => {
   return app.db('accounts')
     .insert({ name: 'Acc User #2', user_id: user2.id }, ['id'])
     .then((acc) => request(app).delete(`${MAIN_ROUTE}/${acc[0].id}`)
