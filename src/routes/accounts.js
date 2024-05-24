@@ -42,9 +42,10 @@ module.exports = (app) => {
       });
   });
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', (req, res, next) => {
     app.services.account.remove({ accountId: req.params.id })
-      .then(() => res.status(204).send());
+      .then(() => res.status(204).send())
+      .catch((error) => next(error));
   });
 
   return router;

@@ -19,7 +19,10 @@ module.exports = (app) => {
     return app.db('accounts').where({ id: accountId }).update(account, '*');
   };
 
-  const remove = ({ accountId }) => {
+  const remove = async ({ accountId }) => {
+    const transactions = await app.services.transaction.findOne({ acc_id: accountId });
+    if (transactions) throw new ValidationError('There are transactions made by this user');
+
     return app.db('accounts').where({ id: accountId }).del();
   };
 

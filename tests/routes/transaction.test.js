@@ -141,3 +141,14 @@ it('should not to delete a transaction other user', () => {
       expect(res.body).toHaveProperty('error', 'You are not allowed to do this');
     });
 });
+
+it('should not remove an account with a transaction', () => {
+  return app.db('transactions')
+    .insert({ description: 'Delete T', date: new Date(), amount: 235, type: 'I', acc_id: accUser.id }, ['id'])
+    .then(() => request(app).delete(`/v1/accounts/${accUser.id}`)
+      .set('Authorization', `Bearer ${user.token}`))
+    .then((res) => {
+      expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('error', 'There are transactions made by this user');
+    });
+});
