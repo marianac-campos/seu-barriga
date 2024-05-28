@@ -17,12 +17,12 @@ it('should list only user transfers', () => {
     });
 });
 
-describe('Ao salvar uma transferência válida...', () => {
+describe('When to save an valid transfer...', () => {
   let transferId;
   let income;
   let outcome;
 
-  it('Deve retornar o status 201 e os dados de transferência', () => {
+  it('should return status 201 and transfer data', () => {
     return request(app).post(MAIN_ROUTE)
       .set('Authorization', TOKEN)
       .send({ description: 'Regular Transfer', user_id: 10001, acc_ori_id: 10001, acc_dest_id: 10002, date: new Date(), amount: 176 })
@@ -34,7 +34,7 @@ describe('Ao salvar uma transferência válida...', () => {
       });
   });
 
-  it('as transações equivalentes devem ter sido geradas', () => {
+  it('equivalent transactions should have been generated', () => {
     return app.db('transactions').where({ transfer_id: transferId }).orderBy('amount')
       .then((transactions) => {
         expect(transactions).toHaveLength(2);
@@ -43,27 +43,27 @@ describe('Ao salvar uma transferência válida...', () => {
       });
   });
 
-  it('a transação de saída deve ser negativa', () => {
+  it('incoming transaction should be negative', () => {
     expect(outcome.type).toBe('O');
     expect(outcome.amount).toBe('-176.00');
     expect(outcome.description).toBe('Transfer To Account #10002');
     expect(outcome.acc_id).toBe(10001);
   });
 
-  it('a transação de entrada deve ser positiva', () => {
+  it('the incoming transaction should be positive', () => {
     expect(income.type).toBe('I');
     expect(income.amount).toBe('176.00');
     expect(income.description).toBe('Transfer From Account #10001');
     expect(income.acc_id).toBe(10002);
   });
 
-  it('ambas devem referenciar a transferência que as originou', () => {
+  it('both should reference the transfer that originated them', () => {
     expect(income.transfer_id).toBe(transferId);
     expect(outcome.transfer_id).toBe(transferId);
   });
 });
 
-describe('Ao tentar salvar uma transferência inválida', () => {
+describe('When trying to save an invalid transfer', () => {
   const testTemplate = (newData, errorMessage) => {
     return request(app).post(MAIN_ROUTE)
       .set('Authorization', TOKEN)
@@ -82,17 +82,17 @@ describe('Ao tentar salvar uma transferência inválida', () => {
       });
   };
 
-  it('não deve inserir sem descrição', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
-  it('não deve inserir sem valor', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
-  it('não deve inserir sem data', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
-  it('não deve inserir sem conta de origem', () => testTemplate({ acc_ori_id: null }, 'Origin account is a mandatory attribute!'));
-  it('não deve inserir sem conta de destino', () => testTemplate({ acc_dest_id: null }, 'Destiny account is a mandatory attribute!'));
-  it('não deve inserir se as contas de origem e destino forem a mesma', () => testTemplate({ acc_dest_id: 10001 }, 'The origin and destination account must not be the same!'));
+  it('should not be inserted without description', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
+  it('should not be inserted without amount', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
+  it('should not be inserted without date', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
+  it('should not be inserted without origin account', () => testTemplate({ acc_ori_id: null }, 'Origin account is a mandatory attribute!'));
+  it('should not be inserted without destiny account', () => testTemplate({ acc_dest_id: null }, 'Destiny account is a mandatory attribute!'));
+  it('should not be insert if the origin and destination accounts are the same', () => testTemplate({ acc_dest_id: 10001 }, 'The origin and destination account must not be the same!'));
 
-  it('não deve inserir se as contas pertencerem a outro usuário', () => testTemplate({ acc_dest_id: 10003 }, 'Account belongs to another user'));
+  it('should not insert if the accounts belong to another user', () => testTemplate({ acc_dest_id: 10003 }, 'Account belongs to another user'));
 });
 
-it('deve retornar uma transferência por id', () => {
+it('should return a transfer by id', () => {
   return request(app).get(`${MAIN_ROUTE}/10001`).set('Authorization', TOKEN)
     .then((res) => {
       expect(res.status).toBe(200);
@@ -100,12 +100,12 @@ it('deve retornar uma transferência por id', () => {
     });
 });
 
-describe('Ao atualizar uma transferência válida...', () => {
+describe('When to update an valid transfer...', () => {
   let transferId;
   let income;
   let outcome;
 
-  it('Deve retornar o status 200 e os dados de transferência', () => {
+  it('should return status 200 and transfer data', () => {
     return request(app).put(`${MAIN_ROUTE}/10001`)
       .set('Authorization', TOKEN)
       .send({
@@ -125,7 +125,7 @@ describe('Ao atualizar uma transferência válida...', () => {
       });
   });
 
-  it('as transações equivalentes devem ter sido geradas', () => {
+  it('equivalent transactions should have been generated', () => {
     return app.db('transactions').where({ transfer_id: transferId }).orderBy('amount')
       .then((transactions) => {
         expect(transactions).toHaveLength(2);
@@ -134,27 +134,27 @@ describe('Ao atualizar uma transferência válida...', () => {
       });
   });
 
-  it('a transação de saída deve ser negativa', () => {
+  it('incoming transaction should be negative', () => {
     expect(outcome.type).toBe('O');
     expect(outcome.amount).toBe('-500.00');
     expect(outcome.description).toBe('Transfer To Account #10002');
     expect(outcome.acc_id).toBe(10001);
   });
 
-  it('a transação de entrada deve ser positiva', () => {
+  it('incoming transaction should be positive', () => {
     expect(income.type).toBe('I');
     expect(income.amount).toBe('500.00');
     expect(income.description).toBe('Transfer From Account #10001');
     expect(income.acc_id).toBe(10002);
   });
 
-  it('ambas devem referenciar a transferência que as originou', () => {
+  it('both should reference the transfer that originated them', () => {
     expect(income.transfer_id).toBe(transferId);
     expect(outcome.transfer_id).toBe(transferId);
   });
 });
 
-describe('Ao tentar atualizar uma transferência inválida', () => {
+describe('When to update an invalid transfer...', () => {
   const testTemplate = (newData, errorMessage) => {
     return request(app).put(`${MAIN_ROUTE}/10001`)
       .set('Authorization', TOKEN)
@@ -173,18 +173,18 @@ describe('Ao tentar atualizar uma transferência inválida', () => {
       });
   };
 
-  it('não deve inserir sem descrição', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
-  it('não deve inserir sem valor', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
-  it('não deve inserir sem data', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
-  it('não deve inserir sem conta de origem', () => testTemplate({ acc_ori_id: null }, 'Origin account is a mandatory attribute!'));
-  it('não deve inserir sem conta de destino', () => testTemplate({ acc_dest_id: null }, 'Destiny account is a mandatory attribute!'));
-  it('não deve inserir se as contas de origem e destino forem a mesma', () => testTemplate({ acc_dest_id: 10001 }, 'The origin and destination account must not be the same!'));
+  it('should not be inserted without description', () => testTemplate({ description: undefined }, 'Description is a mandatory attribute!'));
+  it('should not be inserted without amount', () => testTemplate({ amount: null }, 'Amount is a mandatory attribute!'));
+  it('should not be inserted without date', () => testTemplate({ date: null }, 'Date is a mandatory attribute!'));
+  it('should not be inserted without origin account', () => testTemplate({ acc_ori_id: null }, 'Origin account is a mandatory attribute!'));
+  it('should not be inserted without destiny account', () => testTemplate({ acc_dest_id: null }, 'Destiny account is a mandatory attribute!'));
+  it('should not be insert if the origin and destination accounts are the same', () => testTemplate({ acc_dest_id: 10001 }, 'The origin and destination account must not be the same!'));
 
-  it('não deve inserir se as contas pertencerem a outro usuário', () => testTemplate({ acc_dest_id: 10003 }, 'Account belongs to another user'));
+  it('should not insert if the accounts belong to another user', () => testTemplate({ acc_dest_id: 10003 }, 'Account belongs to another user'));
 });
 
-describe('Ao remover uma transferência', () => {
-  it('deve retornar o status 204', () => {
+describe('When removing a transfer...', () => {
+  it('should return status 204', () => {
     return request(app).delete(`${MAIN_ROUTE}/10001`)
       .set('Authorization', TOKEN)
       .then((res) => {
@@ -192,14 +192,14 @@ describe('Ao remover uma transferência', () => {
       });
   });
 
-  it('o registro deve ter sido removido do banco', () => {
+  it('the record should have been removed from the bank', () => {
     return app.db('transfers').where({ id: 10001 })
       .then((res) => {
         expect(res).toHaveLength(0);
       });
   });
 
-  it('as transações associadas devem ter sido removidas', () => {
+  it('associated transactions should have been removed', () => {
     return app.db('transactions').where({ transfer_id: 10001 })
       .then((res) => {
         expect(res).toHaveLength(0);
@@ -207,7 +207,7 @@ describe('Ao remover uma transferência', () => {
   });
 });
 
-it('should not to delete a transaction other user', () => {
+it('should not to delete a transfer other user', () => {
   return request(app).delete(`${MAIN_ROUTE}/10002`)
     .set('Authorization', TOKEN)
     .then((res) => {
