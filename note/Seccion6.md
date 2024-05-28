@@ -2,6 +2,3 @@
 
 ## Snippets
 
-## Novas Dependências Desbloqueadas!
-
-- 
