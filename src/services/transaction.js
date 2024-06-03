@@ -23,7 +23,7 @@ module.exports = (app) => {
     if (!newTransaction.amount) throw new ValidationError('Amount is a mandatory attribute!');
     if (!newTransaction.acc_id) throw new ValidationError('AccountID is a mandatory attribute!');
     if (!newTransaction.type) throw new ValidationError('Type is a mandatory attribute!');
-    if (newTransaction.type !== 'I' || newTransaction.type !== 'O') throw new ValidationError('Invalid Type!');
+    if (newTransaction.type !== 'I' && newTransaction.type !== 'O') throw new ValidationError('Invalid Type!');
 
     if ((newTransaction.type === 'I' && newTransaction.amount < 0)
       || (newTransaction.type === 'O' && newTransaction.amount > 0)) {
