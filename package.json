@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "secure-mode": "jest --watch --verbose=true"
+    "secure-mode": "jest --watch --verbose=false"
   },
   "keywords": [],
   "author": "Mariana Campos",
@@ -25,6 +25,7 @@
     "jwt-simple": "0.5.5",
     "knex": "0.15.2",
     "knex-logger": "0.1.0",
+    "moment": "2.22.2",
     "passport": "0.4.0",
     "passport-jwt": "4.0.0",
     "pg": "8.0.3"
