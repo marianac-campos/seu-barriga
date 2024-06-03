@@ -37,8 +37,24 @@ module.exports = (app) => {
     const transferId = result[0].id;
 
     const transactions = [
-      { description: `Transfer To Account #${transfer.acc_dest_id}`, date: transfer.date, amount: transfer.amount * -1, type: 'O', acc_id: transfer.acc_ori_id, transfer_id: transferId },
-      { description: `Transfer From Account #${transfer.acc_ori_id}`, date: transfer.date, amount: transfer.amount, type: 'I', acc_id: transfer.acc_dest_id, transfer_id: transferId },
+      {
+        description: `Transfer To Account #${transfer.acc_dest_id}`,
+        date: transfer.date,
+        amount: transfer.amount * -1,
+        type: 'O',
+        acc_id: transfer.acc_ori_id,
+        transfer_id: transferId,
+        status: true,
+      },
+      {
+        description: `Transfer From Account #${transfer.acc_ori_id}`,
+        date: transfer.date,
+        amount: transfer.amount,
+        type: 'I',
+        acc_id: transfer.acc_dest_id,
+        transfer_id: transferId,
+        status: true,
+      },
     ];
 
     await app.db('transactions').insert(transactions);
@@ -59,6 +75,7 @@ module.exports = (app) => {
         type: 'O',
         acc_id: transfer.acc_ori_id,
         transfer_id: transferId,
+        status: true,
       },
       {
         description: `Transfer From Account #${transfer.acc_ori_id}`,
@@ -67,6 +84,7 @@ module.exports = (app) => {
         type: 'I',
         acc_id: transfer.acc_dest_id,
         transfer_id: transferId,
+        status: true,
       },
     ];
 

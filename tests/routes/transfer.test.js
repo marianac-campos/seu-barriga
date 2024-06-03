@@ -61,6 +61,11 @@ describe('When to save an valid transfer...', () => {
     expect(income.transfer_id).toBe(transferId);
     expect(outcome.transfer_id).toBe(transferId);
   });
+
+  it('both should return status like true', () => {
+    expect(income.status).toBe(true);
+    expect(outcome.status).toBe(true);
+  });
 });
 
 describe('When trying to save an invalid transfer', () => {

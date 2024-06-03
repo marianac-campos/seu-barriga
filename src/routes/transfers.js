@@ -13,8 +13,8 @@ module.exports = (app) => {
   router.param('id', (req, res, next) => {
     app.services.transfer.findOne({ id: req.params.id })
       .then((result) => {
-        if (result.length > 0) next();
-        else throw new PermissionError();
+        if (!result) throw new PermissionError();
+        next();
       }).catch((error) => next(error));
   });
 
