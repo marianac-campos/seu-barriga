@@ -17,16 +17,14 @@ module.exports = (app) => {
   };
 
   const save = async (user) => {
-    const { name, email, password } = user;
+    if (!user.name) throw new ValidationError('Name is a mandatory attribute!');
+    if (!user.email) throw new ValidationError('Email is a mandatory attribute!');
+    if (!user.password) throw new ValidationError('Password is a mandatory attribute!');
 
-    if (!name) throw new ValidationError('Name is a mandatory attribute!');
-    if (!email) throw new ValidationError('Email is a mandatory attribute!');
-    if (!password) throw new ValidationError('Password is a mandatory attribute!');
-
-    const userDb = await findOne({ email });
+    const userDb = await findOne({ email: user.email });
 
     const userToSave = { ...user };
-    userToSave.password = getPasswordHash(password);
+    userToSave.password = getPasswordHash(user.password);
 
     if (userDb) throw new ValidationError('User already created!');
 

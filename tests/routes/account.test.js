@@ -56,9 +56,12 @@ it('should return an error if name is duplicated', () => {
     });
 });
 
-it('should only list user accounts', () => {
+it('should only list user accounts', async () => {
   return app.db('accounts')
-    .insert([{ name: 'Acc List #1', user_id: user.id }, { name: 'Acc List #2', user_id: user2.id }])
+    .insert([
+      { name: 'Acc List #1', user_id: user.id },
+      { name: 'Acc List #2', user_id: user2.id },
+    ])
     .then(() => request(app).get(MAIN_ROUTE)
       .set('Authorization', `Bearer ${user.token}`))
     .then((res) => {
