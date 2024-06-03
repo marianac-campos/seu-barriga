@@ -3,3 +3,4 @@
 ## Novas Dependências Desbloqueadas!
 
 - moment
+- husky
