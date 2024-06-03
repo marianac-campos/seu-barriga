@@ -11,7 +11,7 @@ module.exports = (app) => {
   };
 
   router.param('id', (req, res, next) => {
-    app.services.transfer.findOne({ id: req.params.id })
+    app.services.transfer.findOne({ id: req.user.id })
       .then((result) => {
         if (!result) throw new PermissionError();
         next();
