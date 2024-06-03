@@ -6,6 +6,8 @@ module.exports = (app) => {
   };
 
   const save = async (account) => {
+    let account;
+  
     if (!account.name) throw new ValidationError('Name is a mandatory attribute!');
 
     const accountDb = await find({ name: account.name, user_id: account.user_id });
