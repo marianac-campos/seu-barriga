@@ -17,10 +17,10 @@
     }
   },
   "scripts": {
-    "start": "node src/server.js",
-    "test": "jest --coverage --runInBand --forceExit",
+    "start": "NAME=prod node src/server.js",
+    "test": "NAME=test jest --coverage --runInBand --forceExit",
     "lint": "eslint src/** tests/** --fix",
-    "secure-mode": "jest --watch --verbose=false"
+    "secure-mode": "NAME=test jest --watch --verbose=false"
   },
   "husky": {
     "hooks": {
@@ -41,6 +41,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "consign": "0.1.6",
+    "cors": "2.8.5",
     "express": "4.16.4",
     "husky": "1.2.0",
     "jwt-simple": "0.5.5",
@@ -49,6 +50,8 @@
     "moment": "2.22.2",
     "passport": "0.4.0",
     "passport-jwt": "4.0.0",
-    "pg": "8.0.3"
+    "pg": "8.0.3",
+    "uuidv4": "2.0.0",
+    "winston": "3.1.0"
   }
 }
