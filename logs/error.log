@@ -1,0 +1,217 @@
+{
+ "id": "1daa3be7-c826-4b62-8cf9-7c0f6d433192",
+ "name": "ValidationError",
+ "message": "Description is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.166Z"
+}
+{
+ "id": "8a8d9866-de23-4034-9486-a8e05327b221",
+ "name": "ValidationError",
+ "message": "Amount is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.184Z"
+}
+{
+ "id": "594a75c9-f9fd-4536-a6d8-251d56d90fda",
+ "name": "ValidationError",
+ "message": "Date is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.189Z"
+}
+{
+ "id": "46293b5a-0628-4271-b47c-052dbb215de9",
+ "name": "ValidationError",
+ "message": "Origin account is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.194Z"
+}
+{
+ "id": "b8c26bb4-f0cd-4a76-84c9-71a3f4e1585a",
+ "name": "ValidationError",
+ "message": "Destiny account is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.199Z"
+}
+{
+ "id": "3d49be00-db4a-44d1-8bb8-e2f1b55c7e7c",
+ "name": "ValidationError",
+ "message": "The origin and destination account must not be the same!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.203Z"
+}
+{
+ "id": "c34bd186-4606-443b-85ff-b6cf39745fdf",
+ "name": "ValidationError",
+ "message": "Account belongs to another user",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.208Z"
+}
+{
+ "id": "2ed1c164-4604-482c-ad5e-243958ad7b0e",
+ "name": "ValidationError",
+ "message": "Description is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.230Z"
+}
+{
+ "id": "92a2ca93-a1d8-4a48-8565-ebd8d7ad98ee",
+ "name": "ValidationError",
+ "message": "Amount is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.235Z"
+}
+{
+ "id": "dd3e935c-ca13-4a5b-85cb-5924307fff3a",
+ "name": "ValidationError",
+ "message": "Date is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.240Z"
+}
+{
+ "id": "7f63a535-dd7d-448f-9280-45ae8565f02f",
+ "name": "ValidationError",
+ "message": "Origin account is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.246Z"
+}
+{
+ "id": "fbecd11c-fec7-4f15-b2b3-5c812667e7f1",
+ "name": "ValidationError",
+ "message": "Destiny account is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.250Z"
+}
+{
+ "id": "e6b5ead2-d97a-4c7b-8d37-460ac6853b21",
+ "name": "ValidationError",
+ "message": "The origin and destination account must not be the same!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.255Z"
+}
+{
+ "id": "7b3d2bb2-1985-4a0b-ae13-7f9a0faca2b3",
+ "name": "ValidationError",
+ "message": "Account belongs to another user",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.260Z"
+}
+{
+ "id": "5d33d12f-6143-4482-83e0-9716796f14cf",
+ "name": "ValidationError",
+ "message": "Description is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.825Z"
+}
+{
+ "id": "620cdd2f-11bf-4ece-b46a-b291ffff7cef",
+ "name": "ValidationError",
+ "message": "Date is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.829Z"
+}
+{
+ "id": "5e21123d-7193-45cc-b8ee-0514219c7c8e",
+ "name": "ValidationError",
+ "message": "Amount is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.836Z"
+}
+{
+ "id": "0c2c725a-6425-4110-bb5a-6fefb9295895",
+ "name": "ValidationError",
+ "message": "AccountID is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.842Z"
+}
+{
+ "id": "ec6985bf-4fcc-477d-b694-1eeb77c99fcf",
+ "name": "ValidationError",
+ "message": "Type is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.865Z"
+}
+{
+ "id": "6e37e580-de2c-487f-9f44-f27e7d39ce15",
+ "name": "ValidationError",
+ "message": "Invalid Type!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.870Z"
+}
+{
+ "id": "19851361-cbd5-47d8-a7f8-d8b695ab7e0c",
+ "name": "ValidationError",
+ "message": "There are transactions made by this user",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:54.951Z"
+}
+{
+ "id": "553739e8-ca07-4830-82da-ae724a0424cf",
+ "name": "ValidationError",
+ "message": "Name is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:56.160Z"
+}
+{
+ "id": "0a60f779-c1c5-440a-adec-f5cadc86189d",
+ "name": "ValidationError",
+ "message": "An account with that name already exists",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:56.564Z"
+}
+{
+ "id": "c03aca79-43fd-4aca-8681-49d256368518",
+ "name": "ValidationError",
+ "message": "User already created!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:42:59.978Z"
+}
+{
+ "id": "cc93be95-4610-442a-aa1f-abecabb7f48f",
+ "name": "ValidationError",
+ "message": "User already created!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:00.177Z"
+}
+{
+ "id": "3c866101-7996-458b-bf71-80c5e664a754",
+ "name": "ValidationError",
+ "message": "Name is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:00.181Z"
+}
+{
+ "id": "d20fcc20-6849-4aca-86aa-53318dbd7226",
+ "name": "ValidationError",
+ "message": "Email is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:00.184Z"
+}
+{
+ "id": "f09a256b-5599-4c52-a4ce-6b2134fa939a",
+ "name": "ValidationError",
+ "message": "Password is a mandatory attribute!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:00.187Z"
+}
+{
+ "id": "af20e8ed-51ed-4f18-aa3d-3c16b372ce05",
+ "name": "ValidationError",
+ "message": "User already created!",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:00.390Z"
+}
+{
+ "id": "d89ef0d3-88ad-4e2b-818b-7301277aa268",
+ "name": "ValidationError",
+ "message": "Invalid login and/or password",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:01.246Z"
+}
+{
+ "id": "3a64f985-39bc-44dd-ba40-b8d210c5d489",
+ "name": "ValidationError",
+ "message": "Invalid login and/or password",
+ "level": "error",
+ "timestamp": "2024-06-10T16:43:01.250Z"
+}
