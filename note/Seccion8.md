@@ -6,3 +6,7 @@
 
 - moment
 - husky
+- uuidv4
+- winston
+- pm2
+- cors
