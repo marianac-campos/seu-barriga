@@ -12,4 +12,5 @@ module.exports = (app) => {
   protectedRouter.use('/balances', app.routes.balances);
 
   app.use('/v1', app.config.passport.authenticate(), protectedRouter);
+  app.use('/v2', protectedRouter);
 };
