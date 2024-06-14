@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
 const ValidationError = require('../errors/ValidationError');
 
-const SECRET = 'secredo!';
+const SECRET = 'Segredo!';
 const router = express.Router();
 
 module.exports = (app) => {
