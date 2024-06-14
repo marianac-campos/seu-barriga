@@ -6,7 +6,7 @@ const uuid = require('uuidv4');
 // const knexLogger = require('knex-logger');
 const knexFile = require('../knexfile');
 
-app.db = knex(knexFile[process.env.NAME]);
+app.db = knex(knexFile[process.env.NAME || 'test']);
 
 app.log = winston.createLogger({
   leven: 'debug',
@@ -37,8 +37,7 @@ app.use((error, req, res, next) => {
   const { name, message, stack } = error;
 
   if (name === 'ValidationError') res.status(400).json({ error: message });
-  if (name === 'Permission') res.status(403).json({ error: message });
-
+  else if (name === 'Permission') res.status(403).json({ error: message });
   else {
     const id = uuid();
 
